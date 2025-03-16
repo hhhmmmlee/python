@@ -96,28 +96,29 @@ def mycode_python_stype_2002():
     print(f"in_cars is {in_cars}")
     print(f"out_cars is {out_cars}")
 
-    passed_cars = deque()
+ 
     out_map = {}
     fast_map = []
     
-    in_map = {car:i for i, car in enumerate(in_cars)} 
-    
+    in_map = {car:i for i, car in enumerate(in_cars)}  
+    passed_cars = out_cars.copy()
+
     print(f"in_map is {in_map}")
     overtakes=0
-    for car in out_cars:
+    for i, car in enumerate(out_cars):
         in_pos =  in_map[car] 
-        for passed_car in passed_cars:
+        for j,passed_car in enumerate(passed_cars):
             print(f"{car}, {in_pos} / {passed_car},{in_map[passed_car]}")
-            if in_map[passed_car]  > in_pos:
+            if in_map[passed_car]  < in_pos:
                 overtakes += 1
-                break
-        passed_cars.add(car) 
-        print(passed_cars)
-    
+                fast_map.append(car)
+                break 
+        
+        passed_cars.remove(car)
  
  
     
-    print(f"fast_map is {overtakes}")
+    print(f"fast_map is {overtakes} {fast_map}")
     return len(fast_map)
                 
 def counter_2002(num, all_cars):
